@@ -35,7 +35,12 @@ void search_computer(struct computer *computers, int *count, char name[20]){
 }
 void delete(struct computer *computers, int*count, char name[20]){
     int i, value;
-
+    for (i=0; i<*count; i++){
+        value = strcmp(computers[i].name, name);
+        if (value == 0){
+            
+        }
+    }
 }
 
 
