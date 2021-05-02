@@ -28,6 +28,14 @@ void print_wares(struct ware *list_of_wares, int *count){
     }
 }
 
+void count_sum(struct ware *list_of_wares, int *count){
+    int i, sum=0;
+    for (i=0; i<*count; i++){
+        sum += (list_of_wares[i].price * list_of_wares[i].amount);
+    }
+    printf("Suma wartosci wszystkich towarow: %d\n", sum);
+}
+
 int main(){
     struct ware list_of_wares[MAX];
 
@@ -45,6 +53,9 @@ int main(){
         }
         else if((c == 'W') || (c == 'w')){
             print_wares(list_of_wares, &count);
+        }
+        else if((c == 'R') || (c == 'r')){
+            count_sum(list_of_wares, &count);
         }
         else if((c == 'Q') || (c == 'q'))
             break;     
