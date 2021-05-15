@@ -8,20 +8,17 @@ void print_matrix(double **tab, int n, int m);
 int main(){
     int n,m;
     int i,j;
+    int o;
     int row,col;
     double **tab;
     
-    int k, l;
-
     printf("Prosze podac rozmiary macierzy: n x m\n");
     scanf("%d%d", &n,&m);
-
-    double (*mat)[m] = allocate_matrix(n,m);
-
-    //alokowanie pamieci na macierz
-    tab = malloc(n * sizeof(*tab));
-    for(k = 0;k<n;k++){
-        tab[k] = malloc(m * sizeof(*tab[k]));
+ 
+    //allocate memory for matrix
+    tab = malloc(n * sizeof(double*));
+    for(o=0;o<n;o++){
+        tab[o] = malloc(m * sizeof(double));
     }
 
     printf("Prosze podac elementy macierzy\n");
@@ -69,7 +66,3 @@ double calc(double **tab, int n, int m){
 
     return ;
 }
-void *allocate_matrix(int nRow, int mCol){
-    return malloc(sizeof(double[nRow][mCol]));
-}
-
