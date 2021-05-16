@@ -2,7 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-double calc(double **ret, int n, int m);
+double** calc(double **ret, int n, int m);
 void print_matrix(double **tab, int n, int m);
 
 int main(){
@@ -11,7 +11,8 @@ int main(){
     int o;
     int row,col;
     double **tab;
-    
+    double **ret;
+
     printf("Prosze podac rozmiary macierzy: n x m\n");
     scanf("%d%d", &n,&m);
  
@@ -29,6 +30,8 @@ int main(){
     }
 
     print_matrix(tab, n,m);
+    ret = calc(tab,n,m);
+    print_matrix(ret,n,m);
 
     return 0;
 }
@@ -42,9 +45,8 @@ void print_matrix(double **tab, int n, int m){
         }
         printf("\n");
     }
-
 }
-double calc(double **tab, int n, int m){
+double** calc(double **tab, int n, int m){
     double **ret;
     int i,j,l;
     double a;
@@ -64,5 +66,5 @@ double calc(double **tab, int n, int m){
         }
     }
 
-    return ;
+    return ret;
 }
