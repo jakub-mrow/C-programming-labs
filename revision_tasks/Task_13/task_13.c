@@ -11,10 +11,10 @@ struct Student{
     int index_number;
 }students[N];
 
-struct Programming{
+struct programming{
     int index_number;
     int grade;
-};
+}prog[M];
 
 int main(){
     FILE *file;
@@ -34,11 +34,28 @@ int main(){
         fgets(buffer, 200, file);
         i++;
     }
-
     int count = i;
     for(int i = 0; i<count; i++){
         printf("%s %s %d \n", students[i].surname, students[i].name, students[i].index_number);
     }
     fclose(file);
+
+    FILE *programming_file;
+    programming_file = fopen("Programming.txt", "rt");
+    if (programming_file == NULL){
+        return 1;
+    }
+    int j = 0;
+    while(!feof(programming_file)){
+        fscanf(programming_file, "%d %d", &prog[j].index_number, &prog[j].grade);
+        j++;
+    }
+    int num = j;
+    for(int i = 0; i<num;i++){
+        printf("%d %d\n", prog[i].index_number, prog[i].grade);
+    }
+
+    fclose(programming_file);
+
     return 0;
 }
