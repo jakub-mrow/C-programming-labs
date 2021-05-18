@@ -7,6 +7,7 @@
 #define K 50
 
 void n_func(int num_of_stud, int num_of_prog, int num_of_py);
+void a_func(int num_of_stud, int num_of_prog, int num_of_py);
 struct Student{
     char surname[30];
     char name[20];
@@ -76,6 +77,7 @@ int main(){
         py_count++;
     }
 
+    //main loop with options
     bool check = true;
     while(check){
         char c;
@@ -87,7 +89,7 @@ int main(){
                 n_func(count, prog_count, py_count);
                 break;
             case 'A':
-                printf("A\n");
+                a_func(count, prog_count, py_count);
                 break;
             case 'Q':
                 check = false;
@@ -120,6 +122,29 @@ void n_func(int num_of_stud, int num_of_prog, int num_of_py){
     }
     for(int i = 0; i < num_of_py; i++){
         if (index == py[i].index_number){
+            printf("Ocena z fizyki: %d\n", py[i].grade);
+        }
+    }
+}
+
+void a_func(int num_of_stud, int num_of_prog, int num_of_py){
+    int id;
+    printf("Prosze podac numer indeksu\n");
+    scanf("%d", &id);
+
+    for(int i = 0; i < num_of_stud; i++){
+        if (id == students[i].index_number){
+            printf("Student:\n");
+            printf("%s %s\n", students[i].name, students[i].surname);
+        }
+    }
+    for(int i = 0;i < num_of_prog; i++){
+        if (id == prog[i].index_number){
+            printf("Ocena z programowania: %d\n", prog[i].grade);
+        }
+    }
+    for(int i = 0; i < num_of_py; i++){
+        if (id == py[i].index_number){
             printf("Ocena z fizyki: %d\n", py[i].grade);
         }
     }
