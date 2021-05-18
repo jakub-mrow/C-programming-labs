@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #define N 50
 #define M 50
 #define K 50
 
+void n_func(int num_of_stud, int num_of_prog, int num_of_py);
 struct Student{
     char surname[30];
     char name[20];
@@ -16,9 +18,14 @@ struct programming{
     int grade;
 }prog[M];
 
-int main(){
-    FILE *file;
+struct physics{
+    int index_number;
+    int grade;
+} py[K];
 
+int main(){
+    // Get data from students file
+    FILE *file;
     file = fopen("Studenci.txt", "r");
     if (file == NULL){
         return 1;
@@ -40,22 +47,80 @@ int main(){
     }
     fclose(file);
 
+    // Get data from programming grades file
     FILE *programming_file;
     programming_file = fopen("Programming.txt", "rt");
     if (programming_file == NULL){
         return 1;
     }
-    int j = 0;
+    int prog_count = 0;
     while(!feof(programming_file)){
-        fscanf(programming_file, "%d %d", &prog[j].index_number, &prog[j].grade);
-        j++;
+        fscanf(programming_file, "%d %d", &prog[prog_count].index_number, &prog[prog_count].grade);
+        prog_count++;
     }
-    int num = j;
+    int num = prog_count;
     for(int i = 0; i<num;i++){
         printf("%d %d\n", prog[i].index_number, prog[i].grade);
     }
-
     fclose(programming_file);
 
+    // Get data from Physics grades file
+    FILE *physics_file;
+    physics_file = fopen("Fizyka.txt", "r");
+    if (physics_file==NULL){
+        return 1;
+    }
+    int py_count = 0;
+    while(!feof(physics_file)){
+        fscanf(physics_file, "%d %d", &py[py_count].index_number, &py[py_count].grade);
+        py_count++;
+    }
+
+    bool check = true;
+    while(check){
+        char c;
+        printf("Prosze wybrac operacje\n");
+        printf("N - wyprowadzenie ocen z programowania i fizyki na podstawie Nazwiska\nA - wyprowadzenie ocen z programowania i fizyki na podstawie nr albumu\nQ - koniec programu\n");
+        scanf("    %c", &c);
+        switch(c & 0x5F){
+            case 'N': 
+                n_func(count, prog_count, py_count);
+                break;
+            case 'A':
+                printf("A\n");
+                break;
+            case 'Q':
+                check = false;
+                break;
+            default:
+                printf("Wprowadzono zla opcje!\n");
+        }
+    }
+
     return 0;
+}
+
+void n_func(int num_of_stud, int num_of_prog, int num_of_py){
+    char surn[30];
+    int index;
+    printf("Prosze podac nazwisko studenta\n");
+    scanf("%s", surn);
+    for(int i = 0;i<num_of_stud;i++){
+        int value = strcmp(students[i].surname, surn);
+        if (value == 0){
+            printf("Student:\n");
+            printf("%s %s\n", students[i].name, students[i].surname);
+            index = students[i].index_number;
+        }
+    }
+    for(int i = 0; i<num_of_prog;i++){
+        if (index == prog[i].index_number){
+            printf("Ocena z programowania: %d\n", prog[i].grade);
+        }
+    }
+    for(int i = 0; i < num_of_py; i++){
+        if (index == py[i].index_number){
+            printf("Ocena z fizyki: %d\n", py[i].grade);
+        }
+    }
 }
