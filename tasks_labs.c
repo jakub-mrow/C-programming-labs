@@ -14,13 +14,15 @@ void simple_tower(){
 void print_triangle(){
     // Zadanie 7.1.7
    printf("Zad 7.1.7\n");
-   int i, space,k = 0, rows = 5;
+   int i, space,k = 0, rows;
+   printf("Prosze podac ilosc rzedow: \n");
+   scanf("%d", &rows);
    for (i = 1; i <= rows; ++i, k = 0) {
       for (space = 1; space <= rows - i; ++space) {
          printf("  ");
       }
       while (k != 2 * i - 1) {
-         printf("* ");
+         printf("X ");
          ++k;
       }
       printf("\n");
