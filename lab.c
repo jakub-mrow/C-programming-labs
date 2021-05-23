@@ -71,7 +71,7 @@ void liczby_zaprzyjaznione(){
 int main(){
     //Zestaw Zadań 4
 
-    //perfect_numbers();
+    perfect_numbers();
     liczby_zaprzyjaznione();
 
     return 0;
