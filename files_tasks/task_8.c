@@ -78,6 +78,10 @@ int main(){
         printf("\n");
     }
 
+    FILE *out;
+    out = fopen("out_task_8.txt", "w");
+    fprintf(out, "%s", "Suma: ");
+
     printf("---------- Suma -----------\n");
     int sum;
     for(int i = 0; i < columns; i++){
@@ -87,8 +91,12 @@ int main(){
                 sum = sum + tab[j][i];
         }
         printf("%d ", sum);
+        fprintf(out, "%d ", sum);
     }
     printf("\n");
+    fprintf(out, "\n");
+    fprintf(out, "%s", "Srednia: ");
+
     printf("--------- Srednia ---------\n");
     double sum_av;
     int count_lines;
@@ -100,10 +108,11 @@ int main(){
                 sum_av = sum_av + tab[j][i];
             }
         }
-        printf("%lf ", sum_av/count_lines);
+        printf("%.2lf ", sum_av/count_lines);
+        fprintf(out, "%.2lf ", sum_av/count_lines);
         count_lines = 0;
     }
-    
+    fclose(out);
     fclose(f);
     return 0;
 }
