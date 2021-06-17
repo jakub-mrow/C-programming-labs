@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 void simple_tower(){
     // Zadanie 7.1.2
@@ -43,10 +45,12 @@ double sum_2(int n, int m){
     double R;
     int i,j;
     for(i=1;i<=n;i++){
+        mul=1;
         for(j=1;j<=m;j++){
+            mul*=(pow(i,2)+pow(j,2)-1)/(2*i+3*j+4);
         }
+        R += mul;
     }
-
     return R;
 }
 
@@ -59,7 +63,9 @@ int main(){
 
     //Zestaw Zadań 3 zadanie 1
     double S = sum(1,2);
-    printf("%lf", S);    
+    printf("%lf\n", S);
+    double S_2 = sum_2(5,8);
+    printf("%lf ", S_2);    
 
    return 0;
 }
